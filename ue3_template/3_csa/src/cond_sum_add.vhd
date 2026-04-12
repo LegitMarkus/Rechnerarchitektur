@@ -49,14 +49,14 @@ begin
 end architecture;
 
 architecture struct of csa is
-  constant h : natural := n / 2;
+  constant half_width : natural := n / 2;
 
-  signal c_low : std_ulogic;
+  signal carry_low : std_ulogic;
 
-  signal sum_hi0 : std_ulogic_vector(h-1 downto 0);
-  signal sum_hi1 : std_ulogic_vector(h-1 downto 0);
-  signal c_hi0   : std_ulogic;
-  signal c_hi1   : std_ulogic;
+  signal sum_high_if0 : std_ulogic_vector(half_width-1 downto 0);
+  signal sum_high_if1 : std_ulogic_vector(half_width-1 downto 0);
+  signal carry_high_if0 : std_ulogic;
+  signal carry_high_if1 : std_ulogic;
 begin
   base_case : if n = 1 generate
     fa_0 : entity work.fa
@@ -71,50 +71,50 @@ begin
 
   rec_case : if n > 1 generate
     low_part : entity work.csa
-      generic map(n => h)
+      generic map(n => half_width)
       port map(
-        a    => a(h-1 downto 0),
-        b    => b(h-1 downto 0),
+        a    => a(half_width-1 downto 0),
+        b    => b(half_width-1 downto 0),
         cin  => cin,
-        cout => c_low,
-        sum  => sum(h-1 downto 0)
+        cout => carry_low,
+        sum  => sum(half_width-1 downto 0)
       );
 
     high_part0 : entity work.csa
-      generic map(n => h)
+      generic map(n => half_width)
       port map(
-        a    => a(n-1 downto h),
-        b    => b(n-1 downto h),
+        a    => a(n-1 downto half_width),
+        b    => b(n-1 downto half_width),
         cin  => '0',
-        cout => c_hi0,
-        sum  => sum_hi0
+        cout => carry_high_if0,
+        sum  => sum_high_if0
       );
 
     high_part1 : entity work.csa
-      generic map(n => h)
+      generic map(n => half_width)
       port map(
-        a    => a(n-1 downto h),
-        b    => b(n-1 downto h),
+        a    => a(n-1 downto half_width),
+        b    => b(n-1 downto half_width),
         cin  => '1',
-        cout => c_hi1,
-        sum  => sum_hi1
+        cout => carry_high_if1,
+        sum  => sum_high_if1
       );
 
-    mux_sum : for i in 0 to h-1 generate
+    mux_sum : for i in 0 to half_width-1 generate
       m : entity work.mux2
         port map(
-          d0  => sum_hi0(i),
-          d1  => sum_hi1(i),
-          sel => c_low,
-          y   => sum(h+i)
+          d0  => sum_high_if0(i),
+          d1  => sum_high_if1(i),
+          sel => carry_low,
+          y   => sum(half_width+i)
         );
     end generate;
 
     mux_cout : entity work.mux2
       port map(
-        d0  => c_hi0,
-        d1  => c_hi1,
-        sel => c_low,
+        d0  => carry_high_if0,
+        d1  => carry_high_if1,
+        sel => carry_low,
         y   => cout
       );
   end generate;
