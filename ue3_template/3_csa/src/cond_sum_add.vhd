@@ -16,12 +16,11 @@ entity fa is
 end entity;
 
 library ieee; use ieee.std_logic_1164.all;
-entity mux2 is
-  port(
-    a, b: in  std_ulogic;
-    sel: in  std_ulogic;
-    s: out std_ulogic
-  );
+entity mux2_gen is
+  generic(width : integer := 2);
+  port(a, b: in  std_ulogic_vector(width-1 downto 0);
+       s:    in  std_ulogic;
+       y:    out std_ulogic_vector(width-1 downto 0));
 end entity;
 
 library ieee; use ieee.std_logic_1164.all;
@@ -43,9 +42,9 @@ begin
   s    <= a xor b xor cin;
 end architecture;
 
-architecture struct of mux2 is
+architecture struct of mux2_gen is
 begin
-  s <= (a and (not sel)) or (b and sel);
+  y <= (a and (not (width-1 downto 0 => s))) or (b and (width-1 downto 0 => s));
 end architecture;
 
 architecture struct of csa is
@@ -56,12 +55,11 @@ architecture struct of csa is
     );
   end component;
 
-  component mux2
-    port(
-      a, b: in  std_ulogic;
-      sel: in  std_ulogic;
-      s: out std_ulogic
-    );
+  component mux2_gen
+    generic(width : integer := 2);
+    port(a, b: in  std_ulogic_vector(width-1 downto 0);
+         s:    in  std_ulogic;
+         y:    out std_ulogic_vector(width-1 downto 0));
   end component;
 
   component csa
@@ -82,6 +80,10 @@ architecture struct of csa is
   signal sum_high_if1: std_ulogic_vector(half_width-1 downto 0);
   signal carry_high_if0: std_ulogic;
   signal carry_high_if1: std_ulogic;
+
+  signal carry_high_if0_vec: std_ulogic_vector(0 downto 0);
+  signal carry_high_if1_vec: std_ulogic_vector(0 downto 0);
+  signal cout_vec: std_ulogic_vector(0 downto 0);
 begin
   base_case: if n = 1 generate
     fa_0: fa
@@ -120,28 +122,33 @@ begin
       port map(
         a => a(n-1 downto half_width),
         b => b(n-1 downto half_width),
-        cin  => '1',
+        cin => '1',
         cout => carry_high_if1,
-        sum  => sum_high_if1
+        sum => sum_high_if1
       );
 
-    mux_sum: for i in 0 to half_width-1 generate
-      m : mux2
-        port map(
-          a   => sum_high_if0(i),
-          b   => sum_high_if1(i),
-          sel => carry_low,
-          s   => sum(half_width+i)
-        );
-    end generate;
-
-    mux_cout : mux2
+    mux_sum: mux2_gen
+      generic map(width => half_width)
       port map(
-        a   => carry_high_if0,
-        b   => carry_high_if1,
-        sel => carry_low,
-        s   => cout
+        a => sum_high_if0,
+        b => sum_high_if1,
+        s => carry_low,
+        y => sum(n-1 downto half_width)
       );
+
+    carry_high_if0_vec(0) <= carry_high_if0;
+    carry_high_if1_vec(0) <= carry_high_if1;
+
+    mux_cout: mux2_gen
+      generic map(width => 1)
+      port map(
+        a => carry_high_if0_vec,
+        b => carry_high_if1_vec,
+        s => carry_low,
+        y => cout_vec
+      );
+
+    cout <= cout_vec(0);
   end generate;
 end architecture;
 
