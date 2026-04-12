@@ -18,29 +18,29 @@ end entity;
 library ieee; use ieee.std_logic_1164.all;
 entity mux2 is
   port(
-    a, b : in  std_ulogic;
-    sel  : in  std_ulogic;
-    s    : out std_ulogic
+    a, b: in  std_ulogic;
+    sel: in  std_ulogic;
+    s: out std_ulogic
   );
 end entity;
 
 library ieee; use ieee.std_logic_1164.all;
 entity csa is
   generic(
-    n : positive := 16
+    n : integer := 16
   );
   port(
-    a, b : in  std_ulogic_vector(n-1 downto 0);
-    cin  : in  std_ulogic;
-    cout : out std_ulogic;
-    sum  : out std_ulogic_vector(n-1 downto 0)
+    a, b: in std_ulogic_vector(n-1 downto 0);
+    cin: in std_ulogic;
+    cout: out std_ulogic;
+    sum: out std_ulogic_vector(n-1 downto 0)
   );
 end entity;
 
 architecture struct of fa is
 begin
-  s    <= a xor b xor cin;
   cout <= (a and b) or (a and cin) or (b and cin);
+  s    <= a xor b xor cin;
 end architecture;
 
 architecture struct of mux2 is
@@ -49,10 +49,8 @@ begin
 end architecture;
 
 architecture struct of csa is
-  constant half_width : natural := n / 2;
-
+  constant half_width : integer := n / 2;
   signal carry_low : std_ulogic;
-
   signal sum_high_if0   : std_ulogic_vector(half_width-1 downto 0);
   signal sum_high_if1   : std_ulogic_vector(half_width-1 downto 0);
   signal carry_high_if0 : std_ulogic;
