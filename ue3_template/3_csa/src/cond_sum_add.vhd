@@ -8,6 +8,15 @@ end;
 
 --TODO implement conditional sum adder
 library ieee; use ieee.std_logic_1164.all;
+entity adder is
+  port(a,b:  in std_ulogic_vector(15 downto 0);
+       cin:  in std_ulogic;
+       cout: out std_ulogic;
+       sum:  out std_ulogic_vector(15 downto 0));
+end;
+
+--TODO implement conditional sum adder
+library ieee; use ieee.std_logic_1164.all;
 entity fa is
   port(
     a, b, cin : in  std_ulogic;
@@ -75,15 +84,17 @@ architecture struct of csa is
   end component;
 
   constant half_width: integer := n / 2;
+
   signal carry_low: std_ulogic;
+
   signal sum_high_if0: std_ulogic_vector(half_width-1 downto 0);
   signal sum_high_if1: std_ulogic_vector(half_width-1 downto 0);
   signal carry_high_if0: std_ulogic;
   signal carry_high_if1: std_ulogic;
 
-  signal carry_high_if0_vec: std_ulogic_vector(0 downto 0);
-  signal carry_high_if1_vec: std_ulogic_vector(0 downto 0);
-  signal cout_vec: std_ulogic_vector(0 downto 0);
+  signal upper_if0: std_ulogic_vector(half_width downto 0);
+  signal upper_if1: std_ulogic_vector(half_width downto 0);
+  signal upper_selected: std_ulogic_vector(half_width downto 0);
 begin
   base_case: if n = 1 generate
     fa_0: fa
@@ -127,28 +138,20 @@ begin
         sum => sum_high_if1
       );
 
-    mux_sum: mux2_gen
-      generic map(width => half_width)
+    upper_if0 <= carry_high_if0 & sum_high_if0;
+    upper_if1 <= carry_high_if1 & sum_high_if1;
+
+    mux_upper: mux2_gen
+      generic map(width => half_width + 1)
       port map(
-        a => sum_high_if0,
-        b => sum_high_if1,
+        a => upper_if0,
+        b => upper_if1,
         s => carry_low,
-        y => sum(n-1 downto half_width)
+        y => upper_selected
       );
 
-    carry_high_if0_vec(0) <= carry_high_if0;
-    carry_high_if1_vec(0) <= carry_high_if1;
-
-    mux_cout: mux2_gen
-      generic map(width => 1)
-      port map(
-        a => carry_high_if0_vec,
-        b => carry_high_if1_vec,
-        s => carry_low,
-        y => cout_vec
-      );
-
-    cout <= cout_vec(0);
+    cout <= upper_selected(half_width);
+    sum(n-1 downto half_width) <= upper_selected(half_width-1 downto 0);
   end generate;
 end architecture;
 
