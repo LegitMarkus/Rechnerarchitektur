@@ -18,9 +18,9 @@ end entity;
 library ieee; use ieee.std_logic_1164.all;
 entity mux2 is
   port(
-    d0, d1 : in  std_ulogic;
-    sel: in  std_ulogic;
-    y: out std_ulogic
+    a, b : in  std_ulogic;
+    sel  : in  std_ulogic;
+    s    : out std_ulogic
   );
 end entity;
 
@@ -45,7 +45,7 @@ end architecture;
 
 architecture struct of mux2 is
 begin
-  y <= (d0 and (not sel)) or (d1 and sel);
+  s <= (a and (not sel)) or (b and sel);
 end architecture;
 
 architecture struct of csa is
@@ -53,8 +53,8 @@ architecture struct of csa is
 
   signal carry_low : std_ulogic;
 
-  signal sum_high_if0 : std_ulogic_vector(half_width-1 downto 0);
-  signal sum_high_if1 : std_ulogic_vector(half_width-1 downto 0);
+  signal sum_high_if0   : std_ulogic_vector(half_width-1 downto 0);
+  signal sum_high_if1   : std_ulogic_vector(half_width-1 downto 0);
   signal carry_high_if0 : std_ulogic;
   signal carry_high_if1 : std_ulogic;
 begin
@@ -103,19 +103,19 @@ begin
     mux_sum : for i in 0 to half_width-1 generate
       m : entity work.mux2
         port map(
-          d0  => sum_high_if0(i),
-          d1  => sum_high_if1(i),
+          a   => sum_high_if0(i),
+          b   => sum_high_if1(i),
           sel => carry_low,
-          y   => sum(half_width+i)
+          s   => sum(half_width+i)
         );
     end generate;
 
     mux_cout : entity work.mux2
       port map(
-        d0  => carry_high_if0,
-        d1  => carry_high_if1,
+        a   => carry_high_if0,
+        b   => carry_high_if1,
         sel => carry_low,
-        y   => cout
+        s   => cout
       );
   end generate;
 end architecture;
