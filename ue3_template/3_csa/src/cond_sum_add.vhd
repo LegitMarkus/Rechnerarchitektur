@@ -49,6 +49,33 @@ begin
 end architecture;
 
 architecture struct of csa is
+  component fa
+    port(
+      a, b, cin : in  std_ulogic;
+      cout, s: out std_ulogic
+    );
+  end component;
+
+  component mux2
+    port(
+      a, b: in  std_ulogic;
+      sel: in  std_ulogic;
+      s: out std_ulogic
+    );
+  end component;
+
+  component csa
+    generic(
+      n : integer := 16
+    );
+    port(
+      a, b: in std_ulogic_vector(n-1 downto 0);
+      cin: in std_ulogic;
+      cout: out std_ulogic;
+      sum: out std_ulogic_vector(n-1 downto 0)
+    );
+  end component;
+
   constant half_width : integer := n / 2;
   signal carry_low : std_ulogic;
   signal sum_high_if0   : std_ulogic_vector(half_width-1 downto 0);
@@ -57,7 +84,7 @@ architecture struct of csa is
   signal carry_high_if1 : std_ulogic;
 begin
   base_case : if n = 1 generate
-    fa_0 : entity work.fa
+    fa_0 : fa
       port map(
         a    => a(0),
         b    => b(0),
@@ -68,7 +95,7 @@ begin
   end generate;
 
   rec_case : if n > 1 generate
-    low_part : entity work.csa
+    low_part : csa
       generic map(n => half_width)
       port map(
         a    => a(half_width-1 downto 0),
@@ -78,7 +105,7 @@ begin
         sum  => sum(half_width-1 downto 0)
       );
 
-    high_part0 : entity work.csa
+    high_part0 : csa
       generic map(n => half_width)
       port map(
         a    => a(n-1 downto half_width),
@@ -88,7 +115,7 @@ begin
         sum  => sum_high_if0
       );
 
-    high_part1 : entity work.csa
+    high_part1 : csa
       generic map(n => half_width)
       port map(
         a    => a(n-1 downto half_width),
@@ -99,7 +126,7 @@ begin
       );
 
     mux_sum : for i in 0 to half_width-1 generate
-      m : entity work.mux2
+      m : mux2
         port map(
           a   => sum_high_if0(i),
           b   => sum_high_if1(i),
@@ -108,7 +135,7 @@ begin
         );
     end generate;
 
-    mux_cout : entity work.mux2
+    mux_cout : mux2
       port map(
         a   => carry_high_if0,
         b   => carry_high_if1,
@@ -119,8 +146,19 @@ begin
 end architecture;
 
 architecture struct of adder is
+  component csa
+    generic(
+      n : integer := 16
+    );
+    port(
+      a, b: in std_ulogic_vector(n-1 downto 0);
+      cin: in std_ulogic;
+      cout: out std_ulogic;
+      sum: out std_ulogic_vector(n-1 downto 0)
+    );
+  end component;
 begin
-  top : entity work.csa
+  top : csa
     generic map(n => 16)
     port map(
       a    => a,
