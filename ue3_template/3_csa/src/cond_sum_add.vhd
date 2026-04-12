@@ -76,56 +76,56 @@ architecture struct of csa is
     );
   end component;
 
-  constant half_width : integer := n / 2;
-  signal carry_low : std_ulogic;
-  signal sum_high_if0   : std_ulogic_vector(half_width-1 downto 0);
-  signal sum_high_if1   : std_ulogic_vector(half_width-1 downto 0);
-  signal carry_high_if0 : std_ulogic;
-  signal carry_high_if1 : std_ulogic;
+  constant half_width: integer := n / 2;
+  signal carry_low: std_ulogic;
+  signal sum_high_if0: std_ulogic_vector(half_width-1 downto 0);
+  signal sum_high_if1: std_ulogic_vector(half_width-1 downto 0);
+  signal carry_high_if0: std_ulogic;
+  signal carry_high_if1: std_ulogic;
 begin
-  base_case : if n = 1 generate
-    fa_0 : fa
+  base_case: if n = 1 generate
+    fa_0: fa
       port map(
-        a    => a(0),
-        b    => b(0),
-        cin  => cin,
+        a => a(0),
+        b => b(0),
+        cin => cin,
         cout => cout,
-        s    => sum(0)
+        s => sum(0)
       );
   end generate;
 
-  rec_case : if n > 1 generate
-    low_part : csa
+  rec_case: if n > 1 generate
+    low_part: csa
       generic map(n => half_width)
       port map(
-        a    => a(half_width-1 downto 0),
-        b    => b(half_width-1 downto 0),
-        cin  => cin,
+        a => a(half_width-1 downto 0),
+        b => b(half_width-1 downto 0),
+        cin => cin,
         cout => carry_low,
-        sum  => sum(half_width-1 downto 0)
+        sum => sum(half_width-1 downto 0)
       );
 
-    high_part0 : csa
+    high_part0: csa
       generic map(n => half_width)
       port map(
-        a    => a(n-1 downto half_width),
-        b    => b(n-1 downto half_width),
-        cin  => '0',
+        a => a(n-1 downto half_width),
+        b => b(n-1 downto half_width),
+        cin => '0',
         cout => carry_high_if0,
-        sum  => sum_high_if0
+        sum => sum_high_if0
       );
 
-    high_part1 : csa
+    high_part1: csa
       generic map(n => half_width)
       port map(
-        a    => a(n-1 downto half_width),
-        b    => b(n-1 downto half_width),
+        a => a(n-1 downto half_width),
+        b => b(n-1 downto half_width),
         cin  => '1',
         cout => carry_high_if1,
         sum  => sum_high_if1
       );
 
-    mux_sum : for i in 0 to half_width-1 generate
+    mux_sum: for i in 0 to half_width-1 generate
       m : mux2
         port map(
           a   => sum_high_if0(i),
