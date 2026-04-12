@@ -7,43 +7,24 @@ entity adder is
 end;
 
 --TODO implement conditional sum adder
-library ieee;
-use ieee.std_logic_1164.all;
-
+library ieee; use ieee.std_logic_1164.all;
 entity fa is
   port(
     a, b, cin : in  std_ulogic;
-    cout, s   : out std_ulogic
+    cout, s: out std_ulogic
   );
 end entity;
 
-architecture struct of fa is
-begin
-  s    <= a xor b xor cin;
-  cout <= (a and b) or (a and cin) or (b and cin);
-end architecture;
-
-
-library ieee;
-use ieee.std_logic_1164.all;
-
+library ieee; use ieee.std_logic_1164.all;
 entity mux2 is
   port(
     d0, d1 : in  std_ulogic;
-    sel    : in  std_ulogic;
-    y      : out std_ulogic
+    sel: in  std_ulogic;
+    y: out std_ulogic
   );
 end entity;
 
-architecture struct of mux2 is
-begin
-  y <= (d0 and (not sel)) or (d1 and sel);
-end architecture;
-
-
-library ieee;
-use ieee.std_logic_1164.all;
-
+library ieee; use ieee.std_logic_1164.all;
 entity csa is
   generic(
     n : positive := 16
@@ -55,6 +36,17 @@ entity csa is
     sum  : out std_ulogic_vector(n-1 downto 0)
   );
 end entity;
+
+architecture struct of fa is
+begin
+  s    <= a xor b xor cin;
+  cout <= (a and b) or (a and cin) or (b and cin);
+end architecture;
+
+architecture struct of mux2 is
+begin
+  y <= (d0 and (not sel)) or (d1 and sel);
+end architecture;
 
 architecture struct of csa is
   constant h : natural := n / 2;
