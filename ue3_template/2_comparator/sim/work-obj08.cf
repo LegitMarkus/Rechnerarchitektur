@@ -1,0 +1,11 @@
+v 4
+file "/home/vagrant/Rechnerarchitektur/ue3_template/2_comparator/" "tb/testbench.vhd" "510c792198b16b7f87898a3947ffb69833255d7a" "20260412141030.821":
+  entity testbench at 3( 14) + 0 on 17;
+  architecture test of testbench at 8( 143) + 0 on 18;
+file "/home/vagrant/Rechnerarchitektur/ue3_template/2_comparator/" "src/comparator.vhd" "beb320a033628663ae9a8e2ad4b63242e9cd2eba" "20260412141030.808":
+  entity fa at 1( 0) + 0 on 11;
+  entity adder at 7( 126) + 0 on 12;
+  entity comparator at 15( 344) + 0 on 13;
+  architecture struct of fa at 24( 545) + 0 on 14;
+  architecture struct of adder at 30( 665) + 0 on 15;
+  architecture struct of comparator at 47( 1255) + 0 on 16;
