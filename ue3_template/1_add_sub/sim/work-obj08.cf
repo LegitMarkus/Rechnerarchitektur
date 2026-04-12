@@ -1,0 +1,11 @@
+v 4
+file "/home/vagrant/Rechnerarchitektur/ue3_template/1_add_sub/" "tb/testbench.vhd" "c01b0cc9b5d03c68ae2f457b4c51dc6a1311d187" "20260412121945.411":
+  entity testbench at 3( 14) + 0 on 17;
+  architecture test of testbench at 8( 143) + 0 on 18;
+file "/home/vagrant/Rechnerarchitektur/ue3_template/1_add_sub/" "src/add_sub.vhd" "981151cbe1a25f4eb722d79db48160449fc659c2" "20260412121945.395":
+  entity fa at 1( 0) + 0 on 11;
+  entity adder at 7( 126) + 0 on 12;
+  entity add_sub at 16( 377) + 0 on 13;
+  architecture struct of fa at 27( 635) + 0 on 14;
+  architecture struct of adder at 33( 755) + 0 on 15;
+  architecture struct of add_sub at 53( 1387) + 0 on 16;

@@ -1,0 +1,12 @@
+v 4
+file "/home/vagrant/Rechnerarchitektur/CarryRippleAdder/" "tb/testbench.vhd" "c247c91574e19067925009843737168d51a82f5d" "20260412112604.368":
+  entity testbench at 1( 0) + 0 on 89;
+  architecture bhv of testbench at 9( 97) + 0 on 90;
+file "/home/vagrant/Rechnerarchitektur/CarryRippleAdder/" "src/cra_ea_struct.vhd" "d315b56c822a0b257b68f1489820fed24b20dc15" "20260412112604.358":
+  entity cra at 1( 0) + 0 on 83;
+  architecture struct of cra at 10( 218) + 0 on 84;
+  entity cra_gen at 26( 789) + 0 on 85;
+  architecture struct of cra_gen at 36( 1054) + 0 on 86;
+file "/home/vagrant/Rechnerarchitektur/CarryRippleAdder/" "src/fa_ea_struct.vhd" "b33281077a19cb68476d78884b00f4454335edd2" "20260412112604.359":
+  entity fa at 1( 0) + 0 on 87;
+  architecture struct of fa at 9( 132) + 0 on 88;

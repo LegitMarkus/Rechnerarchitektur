@@ -1,0 +1,9 @@
+v 4
+file "/home/vagrant/Rechnerarchitektur/Multiplexer/" "tb/testbench.vhd" "e00a8c82c72c2ff31ebfb5b1e2e07d23524d9217" "20260412112215.769":
+  entity testbench at 1( 0) + 0 on 21;
+  architecture bhv of testbench at 9( 97) + 0 on 22;
+file "/home/vagrant/Rechnerarchitektur/Multiplexer/" "src/mux2_ea_struct.vhd" "395fb9256ef66990abfac60da8def49e765a217f" "20260412112215.756":
+  entity mux2 at 1( 0) + 0 on 17;
+  architecture struct of mux2 at 13( 199) + 0 on 18;
+  entity mux2_gen at 23( 338) + 0 on 19;
+  architecture struct of mux2_gen at 36( 624) + 0 on 20;
