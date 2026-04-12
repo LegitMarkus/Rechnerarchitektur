@@ -8,15 +8,6 @@ end;
 
 --TODO implement conditional sum adder
 library ieee; use ieee.std_logic_1164.all;
-entity adder is
-  port(a,b:  in std_ulogic_vector(15 downto 0);
-       cin:  in std_ulogic;
-       cout: out std_ulogic;
-       sum:  out std_ulogic_vector(15 downto 0));
-end;
-
---TODO implement conditional sum adder
-library ieee; use ieee.std_logic_1164.all;
 entity fa is
   port(
     a, b, cin : in  std_ulogic;
@@ -35,7 +26,7 @@ end entity;
 library ieee; use ieee.std_logic_1164.all;
 entity csa is
   generic(
-    n : integer := 16
+    n: integer := 16
   );
   port(
     a, b: in std_ulogic_vector(n-1 downto 0);
@@ -86,7 +77,7 @@ architecture struct of csa is
   constant half_width: integer := n / 2;
 
   signal carry_low: std_ulogic;
-
+  
   signal sum_high_if0: std_ulogic_vector(half_width-1 downto 0);
   signal sum_high_if1: std_ulogic_vector(half_width-1 downto 0);
   signal carry_high_if0: std_ulogic;
@@ -137,7 +128,7 @@ begin
         cout => carry_high_if1,
         sum => sum_high_if1
       );
-
+    --& hängt zwa kabeln zaum
     upper_if0 <= carry_high_if0 & sum_high_if0;
     upper_if1 <= carry_high_if1 & sum_high_if1;
 
@@ -158,7 +149,7 @@ end architecture;
 architecture struct of adder is
   component csa
     generic(
-      n : integer := 16
+      n: integer := 16
     );
     port(
       a, b: in std_ulogic_vector(n-1 downto 0);
@@ -168,8 +159,7 @@ architecture struct of adder is
     );
   end component;
 begin
-  top : csa
-    generic map(n => 16)
+  top: csa generic map(n => 16)
     port map(
       a    => a,
       b    => b,
