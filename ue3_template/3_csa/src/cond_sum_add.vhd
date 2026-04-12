@@ -1,13 +1,6 @@
-library ieee; use ieee.std_logic_1164.all;
-entity adder is
-  port(a,b:  in std_ulogic_vector(15 downto 0);
-       cin:  in std_ulogic;
-       cout: out std_ulogic;
-       sum:  out std_ulogic_vector(15 downto 0));
-end;
+library ieee;
+use ieee.std_logic_1164.all;
 
---TODO implement conditional sum adder
-library ieee; use ieee.std_logic_1164.all;
 entity fa is
   port(
     a, b, cin : in  std_ulogic;
@@ -22,7 +15,9 @@ begin
 end architecture;
 
 
-library ieee; use ieee.std_logic_1164.all;
+library ieee;
+use ieee.std_logic_1164.all;
+
 entity mux2 is
   port(
     d0, d1 : in  std_ulogic;
@@ -53,34 +48,7 @@ entity csa is
 end entity;
 
 architecture struct of csa is
-  component fa
-    port(
-      a, b, cin : in  std_ulogic;
-      cout, s   : out std_ulogic
-    );
-  end component;
-
-  component mux2
-    port(
-      d0, d1 : in  std_ulogic;
-      sel    : in  std_ulogic;
-      y      : out std_ulogic
-    );
-  end component;
-
-  component csa
-    generic(
-      n : positive
-    );
-    port(
-      a, b : in  std_ulogic_vector(n-1 downto 0);
-      cin  : in  std_ulogic;
-      cout : out std_ulogic;
-      sum  : out std_ulogic_vector(n-1 downto 0)
-    );
-  end component;
-
-  constant h : positive := n / 2;
+  constant h : natural := n / 2;
 
   signal c_low : std_ulogic;
 
@@ -88,20 +56,20 @@ architecture struct of csa is
   signal sum_hi1 : std_ulogic_vector(h-1 downto 0);
   signal c_hi0   : std_ulogic;
   signal c_hi1   : std_ulogic;
-
 begin
   base_case : if n = 1 generate
-    fa_0 : fa port map(
-      a    => a(0),
-      b    => b(0),
-      cin  => cin,
-      cout => cout,
-      s    => sum(0)
-    );
+    fa_0 : entity work.fa
+      port map(
+        a    => a(0),
+        b    => b(0),
+        cin  => cin,
+        cout => cout,
+        s    => sum(0)
+      );
   end generate;
 
   rec_case : if n > 1 generate
-    low_part : csa
+    low_part : entity work.csa
       generic map(n => h)
       port map(
         a    => a(h-1 downto 0),
@@ -111,7 +79,7 @@ begin
         sum  => sum(h-1 downto 0)
       );
 
-    high_part0 : csa
+    high_part0 : entity work.csa
       generic map(n => h)
       port map(
         a    => a(n-1 downto h),
@@ -121,7 +89,7 @@ begin
         sum  => sum_hi0
       );
 
-    high_part1 : csa
+    high_part1 : entity work.csa
       generic map(n => h)
       port map(
         a    => a(n-1 downto h),
@@ -132,37 +100,28 @@ begin
       );
 
     mux_sum : for i in 0 to h-1 generate
-      m : mux2 port map(
-        d0  => sum_hi0(i),
-        d1  => sum_hi1(i),
-        sel => c_low,
-        y   => sum(h+i)
-      );
+      m : entity work.mux2
+        port map(
+          d0  => sum_hi0(i),
+          d1  => sum_hi1(i),
+          sel => c_low,
+          y   => sum(h+i)
+        );
     end generate;
 
-    mux_cout : mux2 port map(
-      d0  => c_hi0,
-      d1  => c_hi1,
-      sel => c_low,
-      y   => cout
-    );
+    mux_cout : entity work.mux2
+      port map(
+        d0  => c_hi0,
+        d1  => c_hi1,
+        sel => c_low,
+        y   => cout
+      );
   end generate;
 end architecture;
 
 architecture struct of adder is
-  component csa
-    generic(
-      n : positive
-    );
-    port(
-      a, b : in  std_ulogic_vector(n-1 downto 0);
-      cin  : in  std_ulogic;
-      cout : out std_ulogic;
-      sum  : out std_ulogic_vector(n-1 downto 0)
-    );
-  end component;
 begin
-  top : csa
+  top : entity work.csa
     generic map(n => 16)
     port map(
       a    => a,
