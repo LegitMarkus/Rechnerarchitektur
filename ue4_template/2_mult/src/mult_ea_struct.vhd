@@ -60,12 +60,12 @@ begin
     a17: adder generic map(32) port map(pp14, pp15, '0', c17, s17);
     --Zusammenadden Ebene 2
     a20: adder generic map(32) port map(s10, s11, '0', c20, s20);
-    a21: adder generic map(32) port map(s12, s12, '0', c21, s21);
-    a22: adder generic map(32) port map(s14, s13, '0', c22, s22);
-    a23: adder generic map(32) port map(s16, s14, '0', c23, s23);
+    a21: adder generic map(32) port map(s12, s13, '0', c21, s21);
+    a22: adder generic map(32) port map(s14, s15, '0', c22, s22);
+    a23: adder generic map(32) port map(s16, s17, '0', c23, s23);
     --Zusammenadden Ebene 3
     a30: adder generic map(32) port map(s20, s21, '0', c30, s30);
-    a31: adder generic map(32) port map(s22, s22, '0', c31, s31);
+    a31: adder generic map(32) port map(s22, s23, '0', c31, s31);
     --Zusammenadden Ebene 4
     a40: adder generic map(32) port map(s30, s31, '0', c40, y);
 
