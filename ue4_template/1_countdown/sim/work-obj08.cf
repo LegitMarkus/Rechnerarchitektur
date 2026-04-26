@@ -1,0 +1,12 @@
+v 4
+file "/home/vagrant/Rechnerarchitektur/ue4_template/1_countdown/" "tb/testbench.vhd" "5b27501e63a2248c980fea5b355e63899fda69c3" "20260426124241.081":
+  entity testbench at 1( 0) + 0 on 57;
+  architecture test of testbench at 9( 130) + 0 on 58;
+file "/home/vagrant/Rechnerarchitektur/ue4_template/1_countdown/" "src/countdown_ea_struct.vhd" "3481dcb964fae77af9c6be52cc37c605df8aaf06" "20260426124241.069":
+  entity countdown at 2( 47) + 0 on 51;
+  architecture struct of countdown at 12( 281) + 0 on 52;
+file "/home/vagrant/Rechnerarchitektur/ue4_template/1_countdown/" "src/ff_ea_bhv.vhd" "f22d7b098da608d2e35166ef6571521211245569" "20260426124241.070":
+  entity ff at 1( 0) + 0 on 53;
+  architecture bhv of ff at 11( 301) + 0 on 54;
+  entity ff_single at 25( 607) + 0 on 55;
+  architecture bhv of ff_single at 34( 814) + 0 on 56;
