@@ -1,245 +1,255 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1750" height="1030" viewBox="0 0 1750 1030">
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1350" viewBox="0 0 2200 1350">
   <defs>
-    <marker id="arrow-black" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/>
+    <marker id="arrow-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
     </marker>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1746ff"/>
+    <marker id="arrow-new" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c21f32"/>
     </marker>
-    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c21f32"/>
+    <marker id="arrow-control" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1746ff"/>
     </marker>
     <style>
-      .bg { fill: #fff; }
-      .blk { fill: #fff; stroke: #111; stroke-width: 3; }
-      .new { fill: #fff4f4; stroke: #c21f32; stroke-width: 3; }
-      .mux { fill: #fff; stroke: #111; stroke-width: 3; }
-      .muxnew { fill: #f4f7ff; stroke: #1746ff; stroke-width: 3; }
-      .wire { fill: none; stroke: #111; stroke-width: 3; marker-end: url(#arrow-black); }
-      .wire2 { fill: none; stroke: #111; stroke-width: 2.2; marker-end: url(#arrow-black); }
-      .wireplain { fill: none; stroke: #111; stroke-width: 2.2; }
-      .newwire { fill: none; stroke: #c21f32; stroke-width: 3; marker-end: url(#arrow-red); }
-      .newwire2 { fill: none; stroke: #c21f32; stroke-width: 2.3; marker-end: url(#arrow-red); }
-      .ctrl { fill: none; stroke: #1746ff; stroke-width: 2.4; marker-end: url(#arrow-blue); }
-      .ctrlthin { fill: none; stroke: #1746ff; stroke-width: 2; marker-end: url(#arrow-blue); }
-      .t { font-family: Arial, Helvetica, sans-serif; font-size: 21px; fill: #111; }
-      .s { font-family: Arial, Helvetica, sans-serif; font-size: 16px; fill: #111; }
-      .xs { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #111; }
-      .b { font-family: Arial, Helvetica, sans-serif; font-size: 16px; fill: #1746ff; }
-      .r { font-family: Arial, Helvetica, sans-serif; font-size: 16px; fill: #c21f32; }
-      .head { font-family: Arial, Helvetica, sans-serif; font-size: 25px; font-weight: 700; fill: #111; }
-      .legend { font-family: Arial, Helvetica, sans-serif; font-size: 15px; fill: #111; }
-      .legendh { font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 700; fill: #111; }
+      .bg { fill: #ffffff; }
+      .block { fill: #ffffff; stroke: #111111; stroke-width: 3; }
+      .new { fill: #fff5f5; stroke: #c21f32; stroke-width: 3; }
+      .ext { fill: #f4f7ff; stroke: #1746ff; stroke-width: 3; }
+      .mux { fill: #ffffff; stroke: #111111; stroke-width: 3; }
+      .mux-new { fill: #fff5f5; stroke: #c21f32; stroke-width: 3; }
+      .mux-ext { fill: #f4f7ff; stroke: #1746ff; stroke-width: 3; }
+      .data { fill: none; stroke: #111111; stroke-width: 3; marker-end: url(#arrow-data); }
+      .data2 { fill: none; stroke: #111111; stroke-width: 2.2; marker-end: url(#arrow-data); }
+      .bus { fill: none; stroke: #111111; stroke-width: 2.2; }
+      .newdata { fill: none; stroke: #c21f32; stroke-width: 3; marker-end: url(#arrow-new); }
+      .newdata2 { fill: none; stroke: #c21f32; stroke-width: 2.2; marker-end: url(#arrow-new); }
+      .ctrl { fill: none; stroke: #1746ff; stroke-width: 2.4; stroke-dasharray: 8 6; marker-end: url(#arrow-control); }
+      .t { font-family: Arial, Helvetica, sans-serif; font-size: 23px; fill: #111111; }
+      .s { font-family: Arial, Helvetica, sans-serif; font-size: 17px; fill: #111111; }
+      .xs { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #111111; }
+      .blue { font-family: Arial, Helvetica, sans-serif; font-size: 17px; fill: #1746ff; }
+      .red { font-family: Arial, Helvetica, sans-serif; font-size: 17px; fill: #c21f32; }
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 31px; font-weight: 700; fill: #111111; }
+      .subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 18px; fill: #333333; }
+      .legend { font-family: Arial, Helvetica, sans-serif; font-size: 15px; fill: #111111; }
+      .legend-bold { font-family: Arial, Helvetica, sans-serif; font-size: 17px; font-weight: 700; fill: #111111; }
     </style>
   </defs>
 
-  <rect class="bg" width="1750" height="1030"/>
-  <text class="head" x="40" y="42">Originalnahe Erweiterung des Single-Cycle RISC-V Datenpfads</text>
-  <text class="s" x="40" y="68">Schwarz = vorhandener Datenpfad aus der Vorlage, Blau = Kontrollsignale, Rot = neu fuer jalr / auipc / lbu.</text>
+  <rect class="bg" width="2200" height="1350"/>
+  <text class="title" x="50" y="45">Erweiterter Single-Cycle RISC-V Datenpfad</text>
+  <text class="subtitle" x="50" y="74">Abgabeskizze fuer jalr, auipc und lbu. Schwarz = vorhandener Datenpfad, Blau = Kontrollsignale, Rot = neue/erweiterte Logik.</text>
 
-  <!-- PCNext mux, now 3 input -->
-  <polygon class="muxnew" points="55,282 120,315 120,450 55,483"/>
-  <text class="s" x="64" y="317">00</text>
-  <text class="s" x="64" y="365">01</text>
-  <text class="s" x="64" y="413">10</text>
-  <text class="s" x="42" y="512">PCNext</text>
-  <text class="b" x="42" y="535">PC-Mux erweitert</text>
+  <!-- PC selection -->
+  <polygon class="mux-ext" points="70,390 145,425 145,555 70,590"/>
+  <text class="s" x="82" y="425">0</text>
+  <text class="s" x="82" y="525">1</text>
+  <text class="s" x="55" y="623">PCNext</text>
+  <text class="blue" x="55" y="647">PCSrc-Mux</text>
+  <text class="xs" x="55" y="668">0 = PCPlus4</text>
+  <text class="xs" x="55" y="686">1 = PCJumpTarget</text>
 
-  <!-- PC register -->
-  <rect class="blk" x="160" y="335" width="52" height="70"/>
-  <text class="t" x="176" y="376">PC</text>
-  <text class="s" x="169" y="326">CLK</text>
-  <path class="wire" d="M120 382 H160"/>
-  <text class="s" x="128" y="374">PCNext</text>
+  <rect class="block" x="210" y="440" width="65" height="82"/>
+  <text class="t" x="230" y="489">PC</text>
+  <text class="s" x="219" y="428">CLK</text>
+  <path class="data" d="M145 490 H210"/>
+
+  <!-- PC bus -->
+  <path class="data" d="M275 480 H335 V430 H380"/>
+  <path class="bus" d="M335 480 V900"/>
+  <text class="s" x="292" y="468">PC</text>
 
   <!-- Instruction memory -->
-  <rect class="blk" x="275" y="295" width="150" height="170"/>
-  <text class="t" x="310" y="374">Instruction</text>
-  <text class="t" x="324" y="403">Memory</text>
-  <text class="s" x="290" y="333">A</text>
-  <text class="s" x="388" y="333">RD</text>
-
-  <!-- PC to instruction memory and PC taps -->
-  <path class="wire" d="M212 370 H250 V330 H275"/>
-  <text class="s" x="227" y="322">PC</text>
-  <path class="wireplain" d="M250 370 V760"/>
+  <rect class="block" x="380" y="370" width="200" height="205"/>
+  <text class="t" x="425" y="460">Instruction</text>
+  <text class="t" x="448" y="492">Memory</text>
+  <text class="s" x="398" y="420">A</text>
+  <text class="s" x="532" y="420">RD</text>
+  <path class="data" d="M580 430 H690"/>
+  <text class="s" x="610" y="417">Instr</text>
 
   <!-- Instruction bus -->
-  <path class="wire" d="M425 330 H520"/>
-  <text class="s" x="448" y="318">Instr</text>
-  <path class="wireplain" d="M520 210 V640"/>
+  <path class="bus" d="M690 210 V820"/>
+  <path class="data2" d="M690 260 H790"/>
+  <path class="data2" d="M690 300 H790"/>
+  <path class="data2" d="M690 340 H790"/>
+  <path class="data2" d="M690 535 H790"/>
+  <path class="data2" d="M690 590 H790"/>
+  <path class="data2" d="M690 645 H790"/>
+  <path class="data2" d="M690 850 H790"/>
+  <text class="xs" x="707" y="250">Instr[6:0]</text>
+  <text class="xs" x="707" y="290">Instr[14:12]</text>
+  <text class="xs" x="707" y="330">Instr[30]</text>
+  <text class="xs" x="707" y="525">Instr[19:15]</text>
+  <text class="xs" x="707" y="580">Instr[24:20]</text>
+  <text class="xs" x="707" y="635">Instr[11:7]</text>
+  <text class="xs" x="707" y="840">Instr[31:7]</text>
 
   <!-- Control unit -->
-  <rect class="blk" x="610" y="105" width="95" height="190" rx="12"/>
-  <text class="s" x="632" y="154">Control</text>
-  <text class="s" x="648" y="177">Unit</text>
-  <text class="s" x="626" y="215">op</text>
-  <text class="s" x="626" y="240">funct3</text>
-  <text class="s" x="626" y="265">funct7[5]</text>
-  <text class="s" x="626" y="288">Zero</text>
-  <path class="wire2" d="M520 210 H610"/>
-  <path class="wire2" d="M520 238 H610"/>
-  <path class="wire2" d="M520 264 H610"/>
-  <text class="xs" x="535" y="202">Instr[6:0]</text>
-  <text class="xs" x="535" y="230">Instr[14:12]</text>
-  <text class="xs" x="535" y="256">Instr[30]</text>
+  <rect class="block" x="790" y="150" width="155" height="260" rx="12"/>
+  <text class="t" x="825" y="212">Control</text>
+  <text class="t" x="852" y="244">Unit</text>
+  <text class="s" x="810" y="285">op</text>
+  <text class="s" x="810" y="325">funct3</text>
+  <text class="s" x="810" y="365">funct7[5]</text>
+  <text class="s" x="810" y="392">Zero</text>
 
   <!-- Register file -->
-  <rect class="blk" x="610" y="335" width="175" height="175"/>
-  <text class="t" x="643" y="449">Register</text>
-  <text class="t" x="727" y="449">File</text>
-  <text class="s" x="626" y="369">A1</text>
-  <text class="s" x="626" y="414">A2</text>
-  <text class="s" x="626" y="459">A3</text>
-  <text class="s" x="626" y="494">WD3</text>
-  <text class="s" x="742" y="369">RD1</text>
-  <text class="s" x="742" y="430">RD2</text>
-  <text class="s" x="716" y="323">WE3</text>
-  <text class="s" x="625" y="325">CLK</text>
-  <path class="wire2" d="M520 365 H610"/>
-  <path class="wire2" d="M520 410 H610"/>
-  <path class="wire2" d="M520 455 H610"/>
-  <text class="xs" x="536" y="356">Instr[19:15]</text>
-  <text class="xs" x="536" y="401">Instr[24:20]</text>
-  <text class="xs" x="536" y="446">Instr[11:7]</text>
+  <rect class="block" x="790" y="500" width="290" height="245"/>
+  <text class="t" x="852" y="657">Register</text>
+  <text class="t" x="958" y="657">File</text>
+  <text class="s" x="810" y="540">A1</text>
+  <text class="s" x="810" y="595">A2</text>
+  <text class="s" x="810" y="650">A3</text>
+  <text class="s" x="810" y="705">WD3</text>
+  <text class="s" x="1020" y="540">RD1</text>
+  <text class="s" x="1020" y="615">RD2</text>
+  <text class="s" x="975" y="485">WE3</text>
+  <text class="s" x="808" y="485">CLK</text>
 
-  <!-- Extend, original position but extended functionality -->
-  <rect class="new" x="610" y="595" width="190" height="65"/>
-  <text class="t" x="665" y="633">Extend</text>
-  <text class="r" x="637" y="655">neu: U-Type fuer auipc</text>
-  <path class="wire2" d="M520 625 H610"/>
-  <text class="xs" x="535" y="616">Instr[31:7]</text>
+  <!-- Extend -->
+  <rect class="new" x="790" y="810" width="290" height="92"/>
+  <text class="t" x="902" y="860">Extend</text>
+  <text class="red" x="845" y="885">I/S/B/J/U immediates</text>
 
   <!-- ALU SrcB mux -->
-  <polygon class="mux" points="895,405 955,435 955,545 895,575"/>
-  <text class="s" x="908" y="435">0</text>
-  <text class="s" x="908" y="536">1</text>
-  <text class="s" x="910" y="602">SrcB</text>
+  <polygon class="mux" points="1220,565 1295,600 1295,725 1220,760"/>
+  <text class="s" x="1234" y="602">0</text>
+  <text class="s" x="1234" y="708">1</text>
+  <text class="s" x="1230" y="787">SrcB</text>
 
   <!-- ALU -->
-  <polygon class="blk" points="1050,355 1155,395 1155,570 1050,610 1082,482"/>
-  <text class="t" x="1080" y="502" transform="rotate(-90 1080,502)">ALU</text>
-  <text class="s" x="1016" y="412">SrcA</text>
-  <text class="s" x="1014" y="542">SrcB</text>
-  <text class="s" x="1167" y="428">Zero</text>
-  <text class="s" x="1167" y="505">ALUResult</text>
-
-  <path class="wire" d="M785 365 H1055"/>
-  <path class="wire" d="M785 430 H860 V435 H895"/>
-  <path class="wire" d="M800 628 H860 V545 H895"/>
-  <path class="wire" d="M955 492 H1060"/>
+  <polygon class="block" points="1400,500 1535,548 1535,755 1400,803 1438,650"/>
+  <text class="t" x="1436" y="660" transform="rotate(-90 1436,660)">ALU</text>
+  <text class="s" x="1350" y="565">SrcA</text>
+  <text class="s" x="1350" y="710">SrcB</text>
+  <text class="s" x="1550" y="585">Zero</text>
+  <text class="s" x="1550" y="665">ALUResult</text>
+  <path class="data" d="M1080 535 H1407"/>
+  <path class="data" d="M1080 615 H1165 V600 H1220"/>
+  <path class="data" d="M1080 855 H1165 V725 H1220"/>
+  <path class="data" d="M1295 665 H1415"/>
 
   <!-- Data memory -->
-  <rect class="blk" x="1260" y="310" width="155" height="180"/>
-  <text class="t" x="1304" y="400">Data</text>
-  <text class="t" x="1282" y="430">Memory</text>
-  <text class="s" x="1276" y="355">A</text>
-  <text class="s" x="1276" y="470">WD</text>
-  <text class="s" x="1378" y="354">WE</text>
-  <text class="s" x="1378" y="404">RD</text>
-  <text class="s" x="1276" y="300">CLK</text>
-  <path class="wire" d="M1155 492 H1260"/>
-  <path class="wire" d="M785 430 H830 V470 H1260"/>
-  <text class="s" x="1197" y="482">A</text>
-  <text class="s" x="1162" y="464">WriteData</text>
+  <rect class="block" x="1660" y="475" width="210" height="235"/>
+  <text class="t" x="1710" y="590">Data</text>
+  <text class="t" x="1683" y="622">Memory</text>
+  <text class="s" x="1680" y="535">A</text>
+  <text class="s" x="1680" y="690">WD</text>
+  <text class="s" x="1824" y="535">WE</text>
+  <text class="s" x="1824" y="600">RD</text>
+  <text class="s" x="1680" y="462">CLK</text>
+  <path class="data" d="M1535 660 H1660"/>
+  <path class="data" d="M1080 615 H1128 V690 H1660"/>
+  <text class="s" x="1580" y="648">address</text>
+  <text class="s" x="1555" y="684">WriteData</text>
 
-  <!-- LoadExt inserted on existing ReadData path -->
-  <rect class="new" x="1430" y="360" width="58" height="82"/>
-  <text class="xs" x="1439" y="386">Load</text>
-  <text class="xs" x="1439" y="405">Ext</text>
-  <text class="xs" x="1436" y="428">lbu: zext</text>
-  <path class="wire2" d="M1415 402 H1430"/>
-  <text class="s" x="1417" y="392">ReadData</text>
+  <!-- Load extension -->
+  <rect class="new" x="1935" y="522" width="135" height="130"/>
+  <text class="s" x="1958" y="555">LoadExt</text>
+  <text class="xs" x="1952" y="580">lw: pass through</text>
+  <text class="xs" x="1952" y="602">lbu: funct3=100</text>
+  <text class="xs" x="1952" y="624">byte select + zext</text>
+  <path class="data" d="M1870 600 H1935"/>
+  <text class="s" x="1878" y="590">ReadData</text>
+  <path class="newdata2" d="M1535 700 H1580 V750 H1905 V650 H1935"/>
+  <text class="red" x="1665" y="742">ALUResult[1:0]</text>
 
-  <!-- Result mux, original right side but expanded to 4 inputs -->
-  <polygon class="muxnew" points="1525,555 1610,595 1610,760 1525,800"/>
-  <text class="s" x="1540" y="592">00</text>
-  <text class="s" x="1540" y="637">01</text>
-  <text class="s" x="1540" y="686">10</text>
-  <text class="s" x="1540" y="735">11</text>
-  <text class="s" x="1520" y="830">Result</text>
-  <text class="b" x="1520" y="852">Result-Mux erweitert</text>
+  <!-- Result mux -->
+  <polygon class="mux-ext" points="1960,760 2060,808 2060,1015 1960,1063"/>
+  <text class="s" x="1976" y="805">00</text>
+  <text class="s" x="1976" y="860">01</text>
+  <text class="s" x="1976" y="915">10</text>
+  <text class="s" x="1976" y="970">11</text>
+  <text class="s" x="1955" y="1097">Result Mux</text>
+  <text class="blue" x="1955" y="1120">4:1 erweitert</text>
+  <path class="data2" d="M1535 660 H1600 V805 H1960"/>
+  <text class="s" x="1860" y="795">ALUResult</text>
+  <path class="data2" d="M2070 600 H2090 V860 H1960"/>
+  <text class="s" x="2024" y="850">LoadResult</text>
 
-  <!-- Existing result mux inputs -->
-  <path class="wire2" d="M1155 492 H1210 V592 H1525"/>
-  <text class="s" x="1434" y="584">ALUResult</text>
-  <path class="wire2" d="M1488 402 H1505 V637 H1525"/>
-  <text class="s" x="1490" y="628">LoadResult</text>
+  <!-- PC + 4 adder -->
+  <polygon class="block" points="385,875 520,918 520,1038 385,1080 425,975"/>
+  <text class="t" x="442" y="980">+</text>
+  <path class="data2" d="M335 480 V940 H395"/>
+  <path class="data2" d="M310 1030 H395"/>
+  <text class="s" x="285" y="1038">4</text>
+  <path class="data" d="M520 980 H585"/>
+  <text class="s" x="395" y="1112">PCPlus4 = PC + 4</text>
 
-  <!-- PCPlus4 adder -->
-  <polygon class="blk" points="275,690 395,725 395,815 275,850 310,770"/>
-  <text class="t" x="322" y="765">+</text>
-  <path class="wire2" d="M250 370 V740 H285"/>
-  <path class="wire2" d="M230 805 H285"/>
-  <text class="s" x="210" y="812">4</text>
-  <text class="s" x="285" y="875">PCPlus4</text>
+  <!-- PCPlus4 paths -->
+  <path class="data2" d="M585 980 H630 V1170 H50 V425 H70"/>
+  <text class="s" x="80" y="415">0: PCPlus4</text>
+  <path class="data2" d="M585 980 H650 V1160 H1890 V915 H1960"/>
+  <text class="s" x="1865" y="905">PCPlus4</text>
 
-  <!-- PCPlus4 output to result mux 10 and PC mux 00 -->
-  <path class="wire2" d="M395 770 H1478 V686 H1525"/>
-  <text class="s" x="1432" y="677">PCPlus4</text>
-  <path class="wire2" d="M395 770 H440 V300 H55"/>
-  <text class="s" x="70" y="274">PCPlus4</text>
+  <!-- PCTarget adder -->
+  <polygon class="block" points="1395,900 1530,945 1530,1070 1395,1115 1438,1005"/>
+  <text class="t" x="1455" y="1010">+</text>
+  <path class="data2" d="M335 480 V930 H1405"/>
+  <path class="data2" d="M1080 855 H1345 V1050 H1405"/>
+  <text class="s" x="1350" y="922">PC</text>
+  <text class="s" x="1285" y="1044">ImmExt</text>
+  <path class="data" d="M1530 1005 H1595"/>
+  <text class="s" x="1388" y="1145">PCTarget = PC + ImmExt</text>
 
-  <!-- PCTarget adder, original branch/jal target -->
-  <polygon class="blk" points="1010,650 1135,690 1135,790 1010,830 1048,740"/>
-  <text class="t" x="1065" y="743">+</text>
-  <text class="s" x="996" y="856">PCTarget = PC + ImmExt</text>
-  <path class="wire2" d="M250 370 V690 H1020"/>
-  <path class="wire2" d="M800 628 H960 V770 H1020"/>
-  <path class="wire" d="M1135 740 H1185"/>
+  <!-- auipc result path -->
+  <path class="newdata2" d="M1595 1005 H1915 V970 H1960"/>
+  <text class="red" x="1690" y="958">auipc: Result = PCTarget</text>
 
-  <!-- Existing PCTarget output to PC mux 01 -->
-  <path class="wire2" d="M1185 740 H1235 V865 H30 V365 H55"/>
-  <text class="s" x="72" y="354">PCTarget</text>
+  <!-- jalr target -->
+  <rect class="new" x="1630" y="790" width="190" height="88"/>
+  <text class="s" x="1670" y="822">JalrTarget</text>
+  <text class="xs" x="1656" y="846">ALUResult(31:1) &amp; 0</text>
+  <path class="newdata2" d="M1535 700 H1600 V834 H1630"/>
 
-  <!-- New auipc result path from PCTarget to ResultSrc=11 -->
-  <path class="newwire2" d="M1185 740 H1495 V735 H1525"/>
-  <text class="r" x="1222" y="728">neu fuer auipc</text>
+  <!-- PCJump select -->
+  <polygon class="mux-new" points="1638,940 1735,982 1735,1078 1638,1120"/>
+  <text class="s" x="1654" y="978">0</text>
+  <text class="s" x="1654" y="1058">1</text>
+  <text class="s" x="1654" y="1020">PCJump</text>
+  <path class="data2" d="M1595 1005 H1638"/>
+  <text class="s" x="1598" y="992">PCTarget</text>
+  <path class="newdata2" d="M1725 878 V1060 H1638"/>
+  <text class="red" x="1735" y="1052">JalrTarget</text>
+  <text class="red" x="1630" y="1148">select: op = jalr</text>
+  <path class="newdata" d="M1735 1020 H1780 V1225 H35 V525 H70"/>
+  <text class="red" x="50" y="1218">PCJumpTarget</text>
 
-  <!-- New jalr target path -->
-  <rect class="new" x="1168" y="565" width="140" height="62"/>
-  <text class="s" x="1192" y="590">JalrTarget</text>
-  <text class="xs" x="1188" y="611">ALUResult &amp; ~1</text>
-  <path class="newwire2" d="M1155 520 H1168"/>
-  <path class="newwire2" d="M1168 596 H1125 V885 H15 V412 H55"/>
-  <text class="r" x="75" y="404">JalrTarget</text>
-
-  <!-- LoadExt byte select from ALUResult[1:0] -->
-  <path class="newwire2" d="M1155 535 H1230 V525 H1460 V442"/>
-  <text class="r" x="1240" y="517">ALUResult[1:0]</text>
-
-  <!-- Result feedback to register file WD3 -->
-  <path class="wire" d="M1610 676 H1630 V875 H560 V494 H610"/>
-  <text class="s" x="1587" y="668">Result</text>
+  <!-- Result feedback -->
+  <path class="data" d="M2060 915 H2140 V1275 H760 V705 H790"/>
+  <text class="s" x="2105" y="904">Result</text>
 
   <!-- Zero to control -->
-  <path class="wire2" d="M1155 420 H1190 V286 H705"/>
+  <path class="data2" d="M1535 580 H1580 V392 H945"/>
 
-  <!-- Control signals routed similarly to original upper blue bundle -->
-  <path class="ctrl" d="M705 125 H1570 V555 H1568"/>
-  <text class="b" x="720" y="120">ResultSrc[1:0]</text>
-  <path class="ctrl" d="M705 150 H1470 V250 H88 V282"/>
-  <text class="b" x="720" y="145">PCNextSrc[1:0] (statt PCSrc)</text>
-  <path class="ctrl" d="M705 175 H1238 V332 H1260"/>
-  <text class="b" x="720" y="170">MemWrite</text>
-  <path class="ctrl" d="M705 200 H1035 V385 H1055"/>
-  <text class="b" x="720" y="195">ALUControl[2:0]</text>
-  <path class="ctrl" d="M705 225 H925 V405"/>
-  <text class="b" x="720" y="220">ALUSrc</text>
-  <path class="ctrl" d="M705 250 H825 V595 H800"/>
-  <text class="b" x="720" y="246">ImmSrc[2:0]</text>
-  <path class="ctrl" d="M705 275 H735 V335"/>
-  <text class="b" x="720" y="272">RegWrite</text>
-  <path class="ctrl" d="M705 292 H1458 V360"/>
-  <text class="b" x="720" y="294">LoadCtrl</text>
+  <!-- Control signals -->
+  <path class="ctrl" d="M945 170 H2020 V760 H2008"/>
+  <text class="blue" x="965" y="162">ResultSrc[1:0]</text>
+  <path class="ctrl" d="M945 205 H2160 V305 H165 V615 H105 V590"/>
+  <text class="blue" x="965" y="198">PCSrc</text>
+  <text class="blue" x="117" y="585">s = PCSrc</text>
+  <path class="ctrl" d="M945 240 H1640 V505 H1660"/>
+  <text class="blue" x="965" y="235">MemWrite</text>
+  <path class="ctrl" d="M945 275 H1375 V542 H1405"/>
+  <text class="blue" x="965" y="270">ALUControl[2:0]</text>
+  <path class="ctrl" d="M945 310 H1258 V565"/>
+  <text class="blue" x="965" y="305">ALUSrc</text>
+  <path class="ctrl" d="M945 345 H1115 V810 H1080"/>
+  <text class="blue" x="965" y="340">ImmSrc[2:0]</text>
+  <path class="ctrl" d="M945 380 H985 V500"/>
+  <text class="blue" x="965" y="375">RegWrite</text>
+  <text class="red" x="1510" y="930">op = jalr</text>
 
-  <!-- Legend / coding table -->
-  <rect class="new" x="40" y="925" width="700" height="72" rx="8"/>
-  <text class="legendh" x="58" y="950">Neue/erweiterte Codierungen</text>
-  <text class="legend" x="58" y="973">PCNextSrc: 00=PCPlus4, 01=PCTarget, 10=JalrTarget</text>
-  <text class="legend" x="58" y="993">ResultSrc: 00=ALUResult, 01=LoadResult, 10=PCPlus4, 11=PCTarget</text>
-  <rect class="new" x="765" y="925" width="610" height="72" rx="8"/>
-  <text class="legendh" x="783" y="950">Immediate und Load</text>
-  <text class="legend" x="783" y="973">ImmSrc: 000=I, 001=S, 010=B, 011=J, 100=U</text>
-  <text class="legend" x="783" y="993">LoadCtrl: lbu waehlt Byte mit ALUResult[1:0] und zero-extended.</text>
+  <!-- Small explanatory boxes -->
+  <rect class="ext" x="50" y="90" width="610" height="112" rx="8"/>
+  <text class="legend-bold" x="70" y="118">PC-Auswahl</text>
+  <text class="legend" x="70" y="142">Der originale PCSrc-Mux bleibt 2:1: 0 waehlt PCPlus4, 1 waehlt PCJumpTarget.</text>
+  <text class="legend" x="70" y="166">PCJumpTarget ist normalerweise PCTarget; bei jalr wird JalrTarget = (rs1 + imm) &amp; ~1 genommen.</text>
+  <text class="legend" x="70" y="190">Damit passt die Skizze zur VHDL-Implementierung mit PCJumpTarget vor dem PCSrc-Mux.</text>
+
+  <rect class="ext" x="1330" y="90" width="815" height="112" rx="8"/>
+  <text class="legend-bold" x="1350" y="118">Result / Immediate / Load</text>
+  <text class="legend" x="1350" y="142">ResultSrc: 00=ALUResult, 01=LoadResult, 10=PCPlus4, 11=PCTarget fuer auipc.</text>
+  <text class="legend" x="1350" y="166">ImmSrc wurde auf 3 Bit erweitert: 000=I, 001=S, 010=B, 011=J, 100=U.</text>
+  <text class="legend" x="1350" y="190">LoadExt gibt lw unveraendert weiter; bei lbu wird das Byte ueber ALUResult[1:0] ausgewaehlt und zero-extended.</text>
 </svg>
