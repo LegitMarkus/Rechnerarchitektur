@@ -20,6 +20,8 @@ begin
         immext <= (31 downto 12 => instr(31)) & instr(7) & instr(30 downto 25) & instr(11 downto 8) & '0';
       when EXT_J_TYPE =>
         immext <= (31 downto 20 => instr(31)) & instr(19 downto 12) & instr(20) & instr(30 downto 21) & '0';
+      when EXT_U_TYPE =>
+        immext <= instr(31 downto 12) & (11 downto 0 => '0');
       when others =>
         immext <= (31 downto 0 => 'X');
     end case;

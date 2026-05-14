@@ -28,11 +28,12 @@ package pkg_riscv_sc is
   constant ALU_CTRL_UKNWN : std_ulogic_vector(ALU_CTRL_SIZE-1 downto 0) := "---";
 
 
-  constant IMM_SRC_SIZE : integer := 2;
-  constant EXT_I_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "00";
-  constant EXT_S_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "01";
-  constant EXT_B_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "10";
-  constant EXT_J_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "11";
+  constant IMM_SRC_SIZE : integer := 3;
+  constant EXT_I_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "000";
+  constant EXT_S_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "001";
+  constant EXT_B_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "010";
+  constant EXT_J_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "011";
+  constant EXT_U_TYPE : std_ulogic_vector(IMM_SRC_SIZE-1 downto 0) := "100";
 
   -- Define array types
   type regs_ram is array (REGS_SIZE-1 downto 0) of std_ulogic_vector(31 downto 0);

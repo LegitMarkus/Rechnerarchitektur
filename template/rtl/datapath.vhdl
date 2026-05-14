@@ -84,17 +84,21 @@ architecture struct of datapath is
   end component;
     
   signal PCNext, PCPlus4, PCTarget          : STD_ULOGIC_VECTOR(31 downto 0);
+  signal PCJumpTarget, JalrTarget           : STD_ULOGIC_VECTOR(31 downto 0);
   signal ImmExt                             : STD_ULOGIC_VECTOR(31 downto 0);
   signal SrcA, SrcB                         : STD_ULOGIC_VECTOR(31 downto 0);
   signal Result                             : STD_ULOGIC_VECTOR(31 downto 0);
   signal PC, WriteData, ReadData            : STD_ULOGIC_VECTOR(31 downto 0);
+  signal LoadResult                         : STD_ULOGIC_VECTOR(31 downto 0);
   signal ALUResult                          : STD_ULOGIC_VECTOR(31 downto 0);
 begin
   -- next PC and extend logic
   pcreg       : d_ff    port map(clk, reset, std_logic_vector(TEXT_SEGMENT_START), PCNext, PC);
   pcadd4      : adder   port map(PC, X"00000004", PCPlus4);
   pcaddbranch : adder   port map(PC, ImmExt, PCTarget);
-  pcmux       : mux_2   port map(PCPlus4, PCTarget, PCSrc, PCNext);
+  JalrTarget  <= ALUResult(31 downto 1) & '0';
+  PCJumpTarget <= JalrTarget when Instr(6 downto 0) = "1100111" else PCTarget;
+  pcmux       : mux_2   port map(PCPlus4, PCJumpTarget, PCSrc, PCNext);
   ext         : extend  port map(Instr(31 downto 7), ImmSrc, ImmExt);
     
   -- register file and memory logic
@@ -105,5 +109,28 @@ begin
   -- ALU logic
   srcbmux   :  mux_2 port map(WriteData, ImmExt, ALUSrc, SrcB);
   mainalu   :  alu   port map(SrcA, SrcB,ALUControl, ALUResult, Zero);
-  resultmux :  mux_3 port map(ALUResult, ReadData, PCPlus4, ResultSrc, Result);
+
+  process(ReadData, ALUResult, Instr) begin
+    if Instr(6 downto 0) = "0000011" and Instr(14 downto 12) = "100" then
+      case ALUResult(1 downto 0) is
+        when "00" => LoadResult <= X"000000" & ReadData(7 downto 0);
+        when "01" => LoadResult <= X"000000" & ReadData(15 downto 8);
+        when "10" => LoadResult <= X"000000" & ReadData(23 downto 16);
+        when "11" => LoadResult <= X"000000" & ReadData(31 downto 24);
+        when others => LoadResult <= (others => 'X');
+      end case;
+    else
+      LoadResult <= ReadData;
+    end if;
+  end process;
+
+  process(ALUResult, LoadResult, PCPlus4, PCTarget, ResultSrc) begin
+    case ResultSrc is
+      when "00" => Result <= ALUResult;
+      when "01" => Result <= LoadResult;
+      when "10" => Result <= PCPlus4;
+      when "11" => Result <= PCTarget;
+      when others => Result <= (others => 'X');
+    end case;
+  end process;
 end;
